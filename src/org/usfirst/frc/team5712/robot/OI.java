@@ -1,5 +1,5 @@
 //OI = operator interface
-//This is where we declare hardware such as: joysticks and buttons,
+//This is where we declare hardware such as: joysticks and buttons.
 
 package org.usfirst.frc.team5712.robot;
 
