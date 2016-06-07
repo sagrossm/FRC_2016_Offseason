@@ -13,7 +13,6 @@ public class adjustArmDownEncoderCommand extends Command {
     boolean finished;
     
 	public adjustArmDownEncoderCommand() {
-    	requires(Robot.liftSubsystem);
     	requires(Robot.shooterSubsystem);
     }
 
@@ -23,10 +22,10 @@ public class adjustArmDownEncoderCommand extends Command {
     protected void execute() {
     	if(Robot.shooterSubsystem.shooterEncoder.get() > shootTickGoal) { 
 			//raise the shooting arm to 75 degrees
-				Robot.liftSubsystem.shooterLift.set(0.25);
+				Robot.shooterSubsystem.shooterLift.set(0.25);
 			}
 			else if (Robot.shooterSubsystem.shooterEncoder.get() < shootTickGoal) {
-				Robot.liftSubsystem.shooterLift.set(-0.25);
+				Robot.shooterSubsystem.shooterLift.set(-0.25);
 				finished = true;
 			}
     }
@@ -36,7 +35,7 @@ public class adjustArmDownEncoderCommand extends Command {
     }
 
     protected void end() {
-    	Robot.liftSubsystem.shooterLift.set(0);
+    	Robot.shooterSubsystem.shooterLift.set(0);
     }
 
     protected void interrupted() {

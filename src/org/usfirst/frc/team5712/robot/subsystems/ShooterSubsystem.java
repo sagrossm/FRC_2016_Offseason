@@ -21,6 +21,10 @@ public class ShooterSubsystem extends Subsystem {
 	
 	public Encoder shooterEncoder;
 	
+	public VictorSP shooterLift;
+    
+	public Encoder liftEncoder;
+	
 	public Servo servo;
 	
 	public DoubleSolenoid doubleSolenoid1, shooter;
@@ -33,6 +37,9 @@ public class ShooterSubsystem extends Subsystem {
     	shooterL = new VictorSP(RobotMap.SHOOTER_LEFT_MOTOR);
     	
     	shooterEncoder = new Encoder(RobotMap.SHOOTER_ENCODER_A, RobotMap.SHOOTER_ENCODER_B, false, Encoder.EncodingType.k4X);
+    	
+    	shooterLift = new VictorSP(RobotMap.SHOOTER_LIFT_MOTOR);
+    	liftEncoder = new Encoder(RobotMap.LIFT_ENCODER_A, RobotMap.LIFT_ENCODER_B, false,Encoder.EncodingType.k4X);
     	
     	servo = new Servo(7);
     	
@@ -53,6 +60,7 @@ public class ShooterSubsystem extends Subsystem {
     	SmartDashboard.putNumber("Shooter Encoder", shooterEncoder.get());
     	
     	SmartDashboard.putNumber("Servo Angle", servo.getAngle());
+    	SmartDashboard.putNumber("Lift Encoder", liftEncoder.get());
     }
     
     public void resetShooterEncoder(){
@@ -72,7 +80,7 @@ public class ShooterSubsystem extends Subsystem {
     
     public void lowerArmAutonomous(){
     	if(shooterEncoder.get() < 140){
-    		Robot.liftSubsystem.shooterLift.set(-0.25);
+    		shooterLift.set(-0.25);
     	}
     }
 }

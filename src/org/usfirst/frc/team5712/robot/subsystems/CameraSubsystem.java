@@ -3,6 +3,7 @@ package org.usfirst.frc.team5712.robot.subsystems;
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,14 +18,16 @@ public class CameraSubsystem extends Subsystem {
     }
     
     public void cameraInit(){
-		/*frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
+		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
 		sessionFront = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
-		sessionBack = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		//sessionBack = NIVision.IMAQdxOpenCamera("cam1", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 		currSession = sessionFront;
 		NIVision.IMAQdxConfigureGrab(currSession);
+		NIVision.IMAQdxGrab(currSession, frame, 0);
+		CameraServer.getInstance().setImage(frame);
     }
     
-    public void switchCam(){
+    /*public void switchCam(){
     	if (currSession == sessionFront) {
 			NIVision.IMAQdxStopAcquisition(currSession);
 			currSession = sessionBack;
@@ -35,7 +38,7 @@ public class CameraSubsystem extends Subsystem {
 			currSession = sessionFront;
 			//currSession = sessionShoot;
 			NIVision.IMAQdxConfigureGrab(currSession);
-		} */
-    }
+		} 
+    }*/
 }
 

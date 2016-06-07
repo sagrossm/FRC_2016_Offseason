@@ -12,7 +12,6 @@ public class adjustArmUpEncoderCommand extends Command {
 	boolean finished;
 	
     public adjustArmUpEncoderCommand() {
-        requires(Robot.liftSubsystem);
         requires(Robot.shooterSubsystem);
     }
 
@@ -21,10 +20,10 @@ public class adjustArmUpEncoderCommand extends Command {
 
     protected void execute() {
     	if (Robot.shooterSubsystem.shooterEncoder.get() < 0) {
-			Robot.liftSubsystem.shooterLift.set(-.25);
+			Robot.shooterSubsystem.shooterLift.set(-.25);
 		}
 		else if (Robot.shooterSubsystem.shooterEncoder.get() > 0) {
-			Robot.liftSubsystem.shooterLift.set(0.25);
+			Robot.shooterSubsystem.shooterLift.set(0.25);
 			finished = true;
 		}
     }
@@ -34,7 +33,7 @@ public class adjustArmUpEncoderCommand extends Command {
     }
 
     protected void end() {
-    	Robot.liftSubsystem.shooterLift.set(0);
+    	Robot.shooterSubsystem.shooterLift.set(0);
     }
 
     protected void interrupted() {

@@ -24,8 +24,7 @@ public class Robot extends IterativeRobot {
 	
 	public static DriveSubsystem driveSubsystem = new DriveSubsystem();	
 	public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-	public static LiftSubsystem liftSubsystem = new LiftSubsystem();
-	//public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
+	public static CameraSubsystem cameraSubsystem = new CameraSubsystem();
 	
 	public static OI oi;
 	
@@ -53,7 +52,7 @@ public class Robot extends IterativeRobot {
     
     public void robotInit() {
 		oi = new OI();
-		/*
+		
 		autoChooser = new SendableChooser();
 		autoChooser.addDefault("Lowbar", lowbarAutonomousCommandGroup);
 		autoChooser.addObject("Moat", moatAutonomousCommandGroup);
@@ -62,14 +61,13 @@ public class Robot extends IterativeRobot {
 		angleChooser = new SendableChooser();
 		angleChooser.addDefault("120", 120);
 		angleChooser.addObject("150", 150);
-		*/
+		
 		Robot.shooterSubsystem.compressor.setClosedLoopControl(true);
 		
-		//cameraSubsystem.cameraInit();
+		cameraSubsystem.cameraInit();
 		
 		driveSubsystem.resetGyro();
 		driveSubsystem.resetDriveEncoders();
-		liftSubsystem.resetLiftEncoder();
 		shooterSubsystem.resetShooterEncoder();
     }
 	
@@ -87,10 +85,10 @@ public class Robot extends IterativeRobot {
     	Robot.shooterSubsystem.shooter.set(DoubleSolenoid.Value.kReverse);
         Robot.driveSubsystem.resetDriveEncoders();
         Robot.driveSubsystem.resetGyro();
-        /*
+        
         autonomousSelected = (Command) autoChooser.getSelected();
         autonomousSelected.start();
-        */
+        
     }
 
     public void autonomousPeriodic() {
@@ -98,7 +96,6 @@ public class Robot extends IterativeRobot {
         
         Robot.driveSubsystem.display();
         Robot.shooterSubsystem.display();
-        Robot.liftSubsystem.display();
     }
 
     public void teleopInit() {
@@ -106,7 +103,6 @@ public class Robot extends IterativeRobot {
     	
     	Robot.driveSubsystem.resetDriveEncoders();
     	Robot.driveSubsystem.resetGyro();
-    	Robot.liftSubsystem.resetLiftEncoder();
     	Robot.shooterSubsystem.resetShooterEncoder();
     	
 		driveSubsystem.drive.arcadeDrive(oi.driveStick);
@@ -114,7 +110,6 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
     	Robot.driveSubsystem.display();
-    	Robot.liftSubsystem.display();
     	Robot.shooterSubsystem.display();
 
 		//Robot.driveSubsystem.degreesTurn = (double) autoChooser.getSelected();
