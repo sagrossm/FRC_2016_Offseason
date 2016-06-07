@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class switchCamCommand extends Command {
 
     public switchCamCommand() {
-        //requires(Robot.cameraSubsystem);
+        requires(Robot.cameraSubsystem);
     }
 
     protected void initialize() {

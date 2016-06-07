@@ -11,7 +11,6 @@ public class lowerArmAutonomous extends Command {
 	
     public lowerArmAutonomous() {
         requires(Robot.shooterSubsystem);
-        requires(Robot.liftSubsystem);
     }
 
     protected void initialize() {
@@ -26,7 +25,7 @@ public class lowerArmAutonomous extends Command {
     }
 
     protected void end() {
-    	Robot.liftSubsystem.shooterLift.set(0);
+    	Robot.shooterSubsystem.shooterLift.set(0);
     }
 
     protected void interrupted() {
