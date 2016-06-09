@@ -1,6 +1,7 @@
 package org.usfirst.frc.team5712.robot;
 
 import org.usfirst.frc.team5712.robot.commands.*;
+import org.usfirst.frc.team5712.robot.commands.groups.Shoot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -47,45 +48,39 @@ public class OI {
 		
 		//driveStick Button Commands
 		shiftGear_DriveStickTrigger = new JoystickButton(driveStick, 1);
-		shiftGear_DriveStickTrigger.whileHeld(new shiftGearCommand());
+		shiftGear_DriveStickTrigger.whileHeld(new ShiftGear());
 		
 		invertMotorsTrue_DriveStickButton = new JoystickButton(driveStick, 3);
-		invertMotorsTrue_DriveStickButton.whenPressed(new invertMotorsTrueCommand());
+		invertMotorsTrue_DriveStickButton.whenPressed(new InvertMotorsTrue());
 		invertMotorsFalse_DriveStickButton = new JoystickButton(driveStick, 4);
-		invertMotorsFalse_DriveStickButton.whenPressed(new invertMotorsFalseCommand());
+		invertMotorsFalse_DriveStickButton.whenPressed(new InvertMotorsFalse());
 		
 		turnXdegrees_DriveStickButton = new JoystickButton(driveStick, 5);
-		turnXdegrees_DriveStickButton.whenPressed(new turnXdegreesCommand());
+		turnXdegrees_DriveStickButton.whenPressed(new TurnXdegrees());
 		
 		solenoidOut_DriveStickButton = new JoystickButton(driveStick, 7);
-		solenoidOut_DriveStickButton.whenPressed(new solenoidOutCommand());
+		solenoidOut_DriveStickButton.whenPressed(new SolenoidOut());
 		solenoidIn_DriveStickButton = new JoystickButton(driveStick, 8);
-		solenoidIn_DriveStickButton.whenPressed(new solenoidInCommand());
-		
-		switchCam_DriveStickButton = new JoystickButton(driveStick, 9);
-		switchCam_DriveStickButton.whenPressed(new switchCamCommand());
+		solenoidIn_DriveStickButton.whenPressed(new SolenoidIn());
 		
 		//shootStick Button Commands
 		shoot_shootStickTrigger = new JoystickButton(shootStick, 1);
-		shoot_shootStickTrigger.whenPressed(new shootCommand());
+		shoot_shootStickTrigger.whenPressed(new Shoot());
 		
 		intake_shootStickButton = new JoystickButton(shootStick, 2);
-		intake_shootStickButton.whenPressed(new intakeCommand());
-		
-		switchCam_shootStickButton = new JoystickButton(shootStick, 3);
-		switchCam_shootStickButton.whenPressed(new switchCamCommand());
+		intake_shootStickButton.whenPressed(new Intake());
 		
 		adjustArmUpEncoder_shootStickButton = new JoystickButton(shootStick, 5);
-		adjustArmUpEncoder_shootStickButton.whenPressed(new adjustArmUpEncoderCommand());
+		adjustArmUpEncoder_shootStickButton.whenPressed(new AdjustArmUpEncoder());
 		
 		adjustArmDownEncoder_shootStickButton = new JoystickButton(shootStick, 6);
-		adjustArmDownEncoder_shootStickButton.whenPressed(new adjustArmDownEncoderCommand());
+		adjustArmDownEncoder_shootStickButton.whenPressed(new AdjustArmDownEncoder());
 		
 		solenoidOut_shootStickButton = new JoystickButton(shootStick, 10);
-		solenoidOut_shootStickButton.whenPressed(new solenoidOutCommand());
+		solenoidOut_shootStickButton.whenPressed(new SolenoidOut());
 		
 		solenoidIn_shootStickButton = new JoystickButton(shootStick, 11);
-		solenoidOut_shootStickButton.whenPressed(new solenoidInCommand());
+		solenoidOut_shootStickButton.whenPressed(new SolenoidIn());
 		
 	}
 }

@@ -29,6 +29,8 @@ public class DriveSubsystem extends Subsystem {
 	public double angle = gyro.getYaw();
 	public double degreesTurn;
 	
+	public int driveTickGoal = 2 * -1000;
+	
 	public DriveSubsystem(){
 		
 		leftFront = new VictorSP(RobotMap.LEFT_FRONT_MOTOR);
@@ -57,6 +59,9 @@ public class DriveSubsystem extends Subsystem {
 		SmartDashboard.putNumber("Gyro Y", gyro.getDisplacementY());
 	}
 	
+	public void initDefaultCommand() {
+	}
+	
 	public void resetDriveEncoders(){
 		leftDriveEncoder.reset();
 		rightDriveEncoder.reset();
@@ -65,36 +70,50 @@ public class DriveSubsystem extends Subsystem {
 	public void resetGyro(){
 		gyro.reset();
 	}
-	
-    public void initDefaultCommand() {
+    
+    public void invertMotorsTrue(){
+    	drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+    	drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+    	drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+    	drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
     }
     
-    public void turn150degrees(){
-    	
-    	if (gyro.getYaw() > -120) {
-			//turn robot until yaw is between -145 and -150
-			leftFront.set(-0.4 + (-120 - angle)/180); 
-			leftRear.set(0.4 + (-120 - angle)/180);
-			rightFront.set(-0.4 + (-120 - angle)/180);
-			rightRear.set(-0.4 + (-120 - angle)/180);
-		}
-		else if(gyro.getYaw() < -123) {
-			//turns the robot back if desired angle is passed
-			leftFront.set(0.4 - (-120 - angle)/180); 
-			leftRear.set(-0.4 - (-120 - angle)/180);
-			rightFront.set(0.4 - (-120 - angle)/180);
-			rightRear.set(0.4 - (-120 - angle)/180);
-		}
-		else if(gyro.getYaw() < -120 && gyro.getYaw() > -123) {
-			//stop robot when yaw is between -145 and -150
-			leftFront.set(0);
-			leftRear.set(0);
-			rightFront.set(0);
-			rightRear.set(0);
-		}
+    public void invertMotorsFalse(){
+    	drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, false);
+    	drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, false);
+    	drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
+    	drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, false);
     }
     
-    public void turnXdegrees(double degreesTurn){
+    public void driveStraightForward(){
+    	drive.drive(-0.7, 0.0);
+    	if(angle > 2){
+    		rightFront.set(0.8);
+    		rightRear.set(0.8);
+    	}
+    	if(angle < -2){
+    		leftFront.set(-0.8);
+    		leftRear.set(-0.8);
+    	}
+    }
+    
+    public boolean isUnderLowbar(){
+    	if(leftDriveEncoder.get() > driveTickGoal){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
+    }
+    
+    public void stop(){
+    	leftFront.set(0);
+    	leftRear.set(0);
+    	rightFront.set(0);
+    	rightRear.set(0);
+    }   
+    
+    public void turnXdegrees(){
     	if (gyro.getYaw() > -degreesTurn ) {
     		leftFront.set(-0.4 + (-degreesTurn - angle)/180); 
 			leftRear.set(0.4 + (-degreesTurn - angle)/180);
@@ -109,7 +128,14 @@ public class DriveSubsystem extends Subsystem {
     	}
     }
     
-    
+    public boolean isTurnedX(){
+    	if((gyro.getYaw() < -degreesTurn) && (gyro.getYaw() > -degreesTurn - 3)){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
+    }
 }
 
 

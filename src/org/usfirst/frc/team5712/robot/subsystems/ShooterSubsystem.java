@@ -1,13 +1,9 @@
 package org.usfirst.frc.team5712.robot.subsystems;
 
-import org.usfirst.frc.team5712.robot.Robot;
 import org.usfirst.frc.team5712.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Servo;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -21,15 +17,13 @@ public class ShooterSubsystem extends Subsystem {
 	
 	public Encoder shooterEncoder;
 	
-	public VictorSP shooterLift;
+	public VictorSP shooter;
     
 	public Encoder liftEncoder;
 	
 	public Servo servo;
-	
-	public DoubleSolenoid doubleSolenoid1, shooter;
-	
-	public Compressor compressor;
+		
+	public double shootTickGoal = 10 * -7.5; //tick to degree ratio (degrees/tick) * angle desired
 	
     public ShooterSubsystem(){
     	
@@ -38,16 +32,10 @@ public class ShooterSubsystem extends Subsystem {
     	
     	shooterEncoder = new Encoder(RobotMap.SHOOTER_ENCODER_A, RobotMap.SHOOTER_ENCODER_B, false, Encoder.EncodingType.k4X);
     	
-    	shooterLift = new VictorSP(RobotMap.SHOOTER_LIFT_MOTOR);
+    	shooter = new VictorSP(RobotMap.SHOOTER_LIFT_MOTOR);
     	liftEncoder = new Encoder(RobotMap.LIFT_ENCODER_A, RobotMap.LIFT_ENCODER_B, false,Encoder.EncodingType.k4X);
     	
-    	servo = new Servo(7);
-    	
-		doubleSolenoid1 = new DoubleSolenoid(RobotMap.SHIFTER_SOLENOID_A, RobotMap.SHIFTER_SOLENOID_B);
-		shooter = new DoubleSolenoid(RobotMap.SHOOTER_SOLENOID_A, RobotMap.SHOOTER_SOLENOID_B);
-		
-		compressor = new Compressor(RobotMap.COMPRESSOR);
-    	
+    	servo = new Servo(7);    	
     }
       
 	protected void initDefaultCommand() {		
@@ -67,20 +55,84 @@ public class ShooterSubsystem extends Subsystem {
     	shooterEncoder.reset();
     }
     
-    public void shoot(){
-		shooterL.set(.5); //set left shooting motor to 1
-		shooterR.set(-.5); //set right shooting motor to inverse of left shooting motor
-		Timer.delay(.25);
-		shooter.set(DoubleSolenoid.Value.kForward); //pushes the ball into the motors to shoot
-		Timer.delay(.5);
-		shooterL.set(0); //stops the left shooting motor
-		shooterR.set(0); //stops the right shooting motor
-		shooter.set(DoubleSolenoid.Value.kReverse);
+    public void armDown(){
+		shooter.set(0.25);	
     }
     
-    public void lowerArmAutonomous(){
-    	if(shooterEncoder.get() < 140){
-    		shooterLift.set(-0.25);
+    public boolean isDownAutonomous(){
+    	if(shooterEncoder.get() > 140){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
+    }
+    
+    public boolean isDown(){
+    	if(shooterEncoder.get() < 0){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
+    }
+    
+    public void armUp(){
+    	shooter.set(-0.25);
+    }
+    
+    public boolean isUpAutonomous(){
+    	if(shooterEncoder.get() < -10){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
+    }
+    
+    public boolean isUp(){
+    	if(shooterEncoder.get() < shootTickGoal){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
+    }
+    
+    public void stopArm(){
+    	shooter.set(0.0);
+    }
+    
+    public void intake(){
+    	shooterL.set(-.5);
+    	shooterR.set(.5);
+    }
+    
+    public void stopShooter(){
+    	shooterL.set(0); //stops the left shooting motor
+    	shooterR.set(0); //stops the right shooting motor
+    }
+    
+    public boolean isStopped(){
+    	if((shooterL.get() == 0) && (shooterR.get() == 0)){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
+    }
+    
+    public void shoot(){
+		shooterL.set(.5); 
+		shooterR.set(-.5);
+    }
+    
+    public boolean isFast(){
+    	if((shooterL.get() >= .5) && (shooterR.get() <= -.5)){
+    		return true;
+    	}
+    	else{
+    		return false;
     	}
     }
 }
