@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ShiftGear extends Command {
 
     public ShiftGear() {
-    	requires(Robot.solenoidSubsystem);
+    	requires(Robot.pneumaticSubsystem);
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.solenoidSubsystem.shiftHigh();
+    	Robot.pneumaticSubsystem.shiftHigh();
     }
 
     protected boolean isFinished() {
@@ -25,7 +25,7 @@ public class ShiftGear extends Command {
     }
 
     protected void end() {
-    	Robot.solenoidSubsystem.shiftLow();
+    	Robot.pneumaticSubsystem.shiftLow();
     }
 
     protected void interrupted() {

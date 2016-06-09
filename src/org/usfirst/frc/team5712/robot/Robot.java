@@ -28,7 +28,7 @@ public class Robot extends IterativeRobot {
 	
 	public static DriveSubsystem driveSubsystem = new DriveSubsystem();	
 	public static ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-	public static SolenoidSubsystem solenoidSubsystem = new SolenoidSubsystem();
+	public static PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
 	
 	public static OI oi;
 	
@@ -51,8 +51,8 @@ public class Robot extends IterativeRobot {
     SendableChooser autoChooser, angleChooser;
     
     //Camera Variables
+    public int sessionFront;
     public Image frame;
-	public int sessionFront;
     
     public void robotInit() {
 		oi = new OI();
@@ -66,12 +66,11 @@ public class Robot extends IterativeRobot {
 		angleChooser.addDefault("120", 120);
 		angleChooser.addObject("150", 150);
 		
-		solenoidSubsystem.compressor.setClosedLoopControl(true);
+		pneumaticSubsystem.compressor.setClosedLoopControl(true);
 		
 		frame = NIVision.imaqCreateImage(NIVision.ImageType.IMAGE_RGB, 0);
-		sessionFront = NIVision.IMAQdxOpenCamera("cam3", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
+		sessionFront = NIVision.IMAQdxOpenCamera("cam0", NIVision.IMAQdxCameraControlMode.CameraControlModeController);
 		NIVision.IMAQdxConfigureGrab(sessionFront);
-		CameraServer.getInstance().setImage(frame);
 		
 		driveSubsystem.resetGyro();
 		driveSubsystem.resetDriveEncoders();
@@ -89,7 +88,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         System.out.println("Autonomous Selected: " + autoChooser.getSelected());
         
-    	solenoidSubsystem.in();
+    	pneumaticSubsystem.in();
         driveSubsystem.resetDriveEncoders();
         driveSubsystem.resetGyro();
         
@@ -118,6 +117,9 @@ public class Robot extends IterativeRobot {
     	shooterSubsystem.display();
 
 		driveSubsystem.degreesTurn = (double) autoChooser.getSelected();
+		
+		NIVision.IMAQdxGrab(sessionFront, frame, 0);
+		CameraServer.getInstance().setImage(frame);
     }
     
     public void testPeriodic() {

@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class SolenoidOut extends Command {
 
     public SolenoidOut() {
-    	requires(Robot.solenoidSubsystem);
+    	requires(Robot.pneumaticSubsystem);
     	setTimeout(.5);
     }
 
@@ -18,7 +18,7 @@ public class SolenoidOut extends Command {
     }
 
     protected void execute() {
-    	Robot.solenoidSubsystem.out();
+    	Robot.pneumaticSubsystem.out();
     }
 
     protected boolean isFinished() {

@@ -28,9 +28,6 @@ public class RobotMap {
 	public static int SHOOTER_ENCODER_A = 0;
 	public static int SHOOTER_ENCODER_B = 1;
 	
-	public static int LIFT_ENCODER_A = 6;
-	public static int LIFT_ENCODER_B = 7;
-	
 	public static int COMPRESSOR = 0;
 	
 	public static int SHIFTER_SOLENOID_A = 2;

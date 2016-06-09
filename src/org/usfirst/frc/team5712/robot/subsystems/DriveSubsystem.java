@@ -1,7 +1,6 @@
 package org.usfirst.frc.team5712.robot.subsystems;
 
 import org.usfirst.frc.team5712.robot.RobotMap;
-
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -112,6 +111,16 @@ public class DriveSubsystem extends Subsystem {
     	rightFront.set(0);
     	rightRear.set(0);
     }   
+    
+    public boolean isStopped(){
+    	if((leftFront.get() == 0) && (leftRear.get() == 0) 
+    		&& (rightFront.get() == 0) && (rightRear.get() == 0)){
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}
+    }
     
     public void turnXdegrees(){
     	if (gyro.getYaw() > -degreesTurn ) {

@@ -1,9 +1,7 @@
 package org.usfirst.frc.team5712.robot.subsystems;
 
 import org.usfirst.frc.team5712.robot.RobotMap;
-
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -18,10 +16,6 @@ public class ShooterSubsystem extends Subsystem {
 	public Encoder shooterEncoder;
 	
 	public VictorSP shooter;
-    
-	public Encoder liftEncoder;
-	
-	public Servo servo;
 		
 	public double shootTickGoal = 10 * -7.5; //tick to degree ratio (degrees/tick) * angle desired
 	
@@ -32,13 +26,10 @@ public class ShooterSubsystem extends Subsystem {
     	
     	shooterEncoder = new Encoder(RobotMap.SHOOTER_ENCODER_A, RobotMap.SHOOTER_ENCODER_B, false, Encoder.EncodingType.k4X);
     	
-    	shooter = new VictorSP(RobotMap.SHOOTER_LIFT_MOTOR);
-    	liftEncoder = new Encoder(RobotMap.LIFT_ENCODER_A, RobotMap.LIFT_ENCODER_B, false,Encoder.EncodingType.k4X);
-    	
-    	servo = new Servo(7);    	
+    	shooter = new VictorSP(RobotMap.SHOOTER_LIFT_MOTOR); 	
     }
       
-	protected void initDefaultCommand() {		
+	protected void initDefaultCommand() {
 	}
 	
     public void display(){
@@ -46,9 +37,6 @@ public class ShooterSubsystem extends Subsystem {
     	SmartDashboard.putNumber("Right Shooter Output", shooterR.get());
     	
     	SmartDashboard.putNumber("Shooter Encoder", shooterEncoder.get());
-    	
-    	SmartDashboard.putNumber("Servo Angle", servo.getAngle());
-    	SmartDashboard.putNumber("Lift Encoder", liftEncoder.get());
     }
     
     public void resetShooterEncoder(){

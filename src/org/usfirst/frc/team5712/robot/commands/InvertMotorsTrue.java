@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class InvertMotorsTrue extends Command {
 
     public InvertMotorsTrue() {
-    	 requires(Robot.driveSubsystem); 
+    	requires(Robot.driveSubsystem); 
     }
 
     protected void initialize() {

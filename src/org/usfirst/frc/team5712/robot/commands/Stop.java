@@ -7,29 +7,27 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SolenoidIn extends Command {
-	
-    public SolenoidIn() {
-        requires(Robot.pneumaticSubsystem);
-        setTimeout(.5);
+public class Stop extends Command {
+
+    public Stop() {
+        requires(Robot.driveSubsystem);
     }
 
     protected void initialize() {
     }
 
     protected void execute() {
-    	Robot.pneumaticSubsystem.in();
+    	Robot.driveSubsystem.stop();
     }
 
     protected boolean isFinished() {
-        return isTimedOut();
+        return Robot.driveSubsystem.isStopped();
     }
 
     protected void end() {
     }
 
     protected void interrupted() {
-    	System.out.println("solenoidIn: Interrupted");
     	end();
     }
 }
