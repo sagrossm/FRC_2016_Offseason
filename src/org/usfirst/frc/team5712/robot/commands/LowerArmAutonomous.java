@@ -14,10 +14,10 @@ public class LowerArmAutonomous extends Command {
     }
 
     protected void initialize() {
-    	Robot.shooterSubsystem.armDown();
     }
 
     protected void execute() {
+    	Robot.shooterSubsystem.armDown();
     }
 
     protected boolean isFinished() {
