@@ -15,10 +15,10 @@ public class InvertMotorsFalse extends Command {
     }
 
     protected void initialize() {
+    	Robot.driveSubsystem.invertMotorsFalse();
     }
 
     protected void execute() {
-    	Robot.driveSubsystem.invertMotorsFalse();
     }
 
     protected boolean isFinished() {

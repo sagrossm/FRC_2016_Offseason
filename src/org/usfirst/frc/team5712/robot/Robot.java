@@ -31,19 +31,10 @@ public class Robot extends IterativeRobot {
 	public static PneumaticSubsystem pneumaticSubsystem = new PneumaticSubsystem();
 	
 	public static OI oi;
-	
-	//DriveStick commands
-    Command InvertMotorsFalse, InvertMotorsTrue;
-    Command ShiftGear;
-    Command SolenoidIn, SolenoidOut;
-    Command TurnXdegrees;
-    
-    //shootStick commands
-    CommandGroup Shoot;
     
     //Autonomous commands
     Command autonomousSelected;
-    Command angleSelected;
+    double angleSelected;
     
     CommandGroup LowbarAutonomous, MoatAutonomous;
     
@@ -65,6 +56,7 @@ public class Robot extends IterativeRobot {
 		angleChooser = new SendableChooser();
 		angleChooser.addDefault("120", 120);
 		angleChooser.addObject("150", 150);
+		SmartDashboard.putData("Angle Chooser", angleChooser);
 		
 		pneumaticSubsystem.compressor.setClosedLoopControl(true);
 		
@@ -87,13 +79,16 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         System.out.println("Autonomous Selected: " + autoChooser.getSelected());
+        System.out.println("Angle Selected: " + angleChooser.getSelected());
         
     	pneumaticSubsystem.in();
         driveSubsystem.resetDriveEncoders();
         driveSubsystem.resetGyro();
         
         autonomousSelected = (Command) autoChooser.getSelected();
+        angleSelected = (double) angleChooser.getSelected();
         autonomousSelected.start();
+        
     }
 
     public void autonomousPeriodic() {
@@ -112,11 +107,10 @@ public class Robot extends IterativeRobot {
 
     public void teleopPeriodic() {
     	driveSubsystem.drive.arcadeDrive(oi.driveStick);
+    	shooterSubsystem.shooter.set(oi.shootStick.getRawAxis(1));
     	
     	driveSubsystem.display();
     	shooterSubsystem.display();
-
-		driveSubsystem.degreesTurn = (double) autoChooser.getSelected();
 		
 		NIVision.IMAQdxGrab(sessionFront, frame, 0);
 		CameraServer.getInstance().setImage(frame);
