@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class AdjustArmDownEncoder extends Command {
     
-	public AdjustArmDownEncoder() {
+    public AdjustArmDownEncoder() {
     	requires(Robot.shooterSubsystem);
     }
 
