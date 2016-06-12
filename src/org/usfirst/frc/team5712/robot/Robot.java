@@ -104,8 +104,11 @@ public class Robot extends IterativeRobot {
     	driveSubsystem.resetDriveEncoders();
     	driveSubsystem.resetGyro();	
     }
-
+    
+    @Override
     public void teleopPeriodic() {
+    	Scheduler.getInstance.run();
+    	
     	driveSubsystem.drive.arcadeDrive(oi.driveStick);
     	shooterSubsystem.shooter.set(oi.shootStick.getRawAxis(1));
     	
