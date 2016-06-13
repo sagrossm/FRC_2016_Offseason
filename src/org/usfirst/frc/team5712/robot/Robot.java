@@ -107,7 +107,7 @@ public class Robot extends IterativeRobot {
     
     @Override
     public void teleopPeriodic() {
-    	Scheduler.getInstance.run();
+    	Scheduler.getInstance().run();
     	
     	driveSubsystem.drive.arcadeDrive(oi.driveStick);
     	shooterSubsystem.shooter.set(oi.shootStick.getRawAxis(1));
