@@ -22,10 +22,10 @@ public class OI {
 	//driveStick Buttons (Driver 1):
 	public Button shiftGear_DriveStickTrigger; // = new JoystickButton(driveStick, 1);
 	
-	public Button invertMotorsTrue_DriveStickButton; // = new JoystickButton(driveStick, 3);
-	public Button normalize_DriveStickMotorsButton; // = new JoystickButton(driveStick, 4);
+	public Button invertMotors_DriveStickButton; // = new JoystickButton(driveStick, 3);
+	public Button normalizeMotors_DriveStickButton; // = new JoystickButton(driveStick, 4);
 	
-	public Button turnXdegrees_DriveStickButton // = new JoystickButton(driveStick, 6); 
+	public Button turnXdegrees_DriveStickButton; // = new JoystickButton(driveStick, 6); 
 	
 	public Button solenoidOut_DriveStickButton; // = new JoystickButton(driveStick, 7);
 	public Button solenoidIn_DriveStickButton; // = new JoystickButton(driveStick, 8);
