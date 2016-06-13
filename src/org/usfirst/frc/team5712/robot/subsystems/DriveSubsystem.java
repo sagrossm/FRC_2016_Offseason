@@ -79,7 +79,10 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public void driveStraightForward(){
-    	drive.drive(-0.7, 0.0);
+    	leftFront.set(-0.7);
+    	leftRear.set(-0.7);
+    	rightFront.set(0.7);
+    	rightRear.set(0.7);
     	if(gyro.getYaw() > 2){
     		rightFront.set(0.8);
     		rightRear.set(0.8);

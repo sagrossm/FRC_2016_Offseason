@@ -17,7 +17,7 @@ public class ShooterSubsystem extends Subsystem {
 	
 	public VictorSP shooter;
 		
-	public double shootTickGoal = 10 * -7.5; //tick to degree ratio (degrees/tick) * angle desired
+	public double shootTickGoal = 10 * -140; //tick to degree ratio (degrees/tick) * angle desired
 	
     public ShooterSubsystem(){
     	
@@ -44,11 +44,11 @@ public class ShooterSubsystem extends Subsystem {
     }
     
     public void armDown(){
-		shooter.set(0.25);	
+		shooter.set(-0.25);	
     }
     
     public boolean isDownAutonomous(){
-    	if(shooterEncoder.get() > 140){
+    	if(shooterEncoder.get() > 1400){
     		return true;
     	}
     	else{
@@ -57,7 +57,7 @@ public class ShooterSubsystem extends Subsystem {
     }
     
     public boolean isDown(){
-    	if(shooterEncoder.get() < 0){
+    	if(shooterEncoder.get() > 0){
     		return true;
     	}
     	else{
@@ -66,7 +66,7 @@ public class ShooterSubsystem extends Subsystem {
     }
     
     public void armUp(){
-    	shooter.set(-0.25);
+    	shooter.set(0.25);
     }
     
     public boolean isUpAutonomous(){
