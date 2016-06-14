@@ -35,8 +35,6 @@ public class Robot extends IterativeRobot {
     CommandGroup autonomousSelected;
     double angleSelected;
     
-    CommandGroup LowbarAutonomous, MoatAutonomous;
-    
     //Autonomous Selector
     SendableChooser autoChooser, angleChooser;
     
@@ -83,9 +81,10 @@ public class Robot extends IterativeRobot {
     	pneumaticSubsystem.in();
         driveSubsystem.resetDriveEncoders();
         driveSubsystem.resetGyro();
+        shooterSubsystem.resetShooterEncoder();
         
         autonomousSelected = (CommandGroup) autoChooser.getSelected();
-        angleSelected = (double) angleChooser.getSelected();
+        angleSelected = (int) angleChooser.getSelected();
         autonomousSelected.start();
         
     }
