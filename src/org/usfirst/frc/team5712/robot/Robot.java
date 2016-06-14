@@ -46,8 +46,8 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		autoChooser = new SendableChooser();
-		autoChooser.addDefault("Lowbar", LowbarAutonomous);
-		autoChooser.addObject("Moat", MoatAutonomous);
+		autoChooser.addDefault("Lowbar", new LowbarAutonomous());
+		autoChooser.addObject("Moat", new MoatAutonomous());
 		SmartDashboard.putData("Autonomous Mode Chooser", autoChooser);
 		
 		angleChooser = new SendableChooser();
