@@ -10,7 +10,6 @@ import org.usfirst.frc.team5712.robot.OI;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -33,7 +32,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
     
     //Autonomous commands
-    Command autonomousSelected;
+    CommandGroup autonomousSelected;
     double angleSelected;
     
     CommandGroup LowbarAutonomous, MoatAutonomous;
@@ -85,7 +84,7 @@ public class Robot extends IterativeRobot {
         driveSubsystem.resetDriveEncoders();
         driveSubsystem.resetGyro();
         
-        autonomousSelected = (Command) autoChooser.getSelected();
+        autonomousSelected = (CommandGroup) autoChooser.getSelected();
         angleSelected = (double) angleChooser.getSelected();
         autonomousSelected.start();
         
