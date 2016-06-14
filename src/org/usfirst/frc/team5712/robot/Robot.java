@@ -2,6 +2,7 @@
 package org.usfirst.frc.team5712.robot;
 
 import org.usfirst.frc.team5712.robot.subsystems.*;
+import org.usfirst.frc.team5712.robot.commands.autonomous.*;
 
 import com.ni.vision.NIVision;
 import com.ni.vision.NIVision.Image;
@@ -43,7 +44,7 @@ public class Robot extends IterativeRobot {
     public Image frame;
     
     public void robotInit() {
-		oi = new OI();
+		oi = new OI(); 
 		
 		autoChooser = new SendableChooser();
 		autoChooser.addDefault("Lowbar", new LowbarAutonomous());
